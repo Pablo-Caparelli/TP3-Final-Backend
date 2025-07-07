@@ -3,6 +3,7 @@ import {
   addNewProduct,
   deleteProduct,
   getAllProducts,
+  getNameProduct,
   updateProduct,
 } from "../controllers/productController";
 
@@ -13,5 +14,6 @@ productRouter.get("/", getAllProducts);
 productRouter.post("/", addNewProduct);
 productRouter.patch("/:id", updateProduct);
 productRouter.delete("/:id", deleteProduct);
+productRouter.get("/products/name/:name", getNameProduct);
 
 export { productRouter };

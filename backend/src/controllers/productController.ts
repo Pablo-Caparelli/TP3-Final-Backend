@@ -18,6 +18,32 @@ const getAllProducts = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+const getNameProduct = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const name = req.params.name;
+    const product = await Product.findOne({ name: name });
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Producto no encontrado",
+      });
+    }
+
+    res.json({
+      success: true,
+      data: product,
+      message: "Producto obtenido por nombre",
+    });
+  } catch (error) {
+    const err = error as Error;
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
 const addNewProduct = async (req: Request, res: Response): Promise<any> => {
   try {
     const body = req.body;
@@ -86,4 +112,10 @@ const deleteProduct = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
-export { getAllProducts, addNewProduct, updateProduct, deleteProduct };
+export {
+  getAllProducts,
+  getNameProduct,
+  addNewProduct,
+  updateProduct,
+  deleteProduct,
+};
