@@ -63,7 +63,7 @@ const Dashboard = () => {
           <option value="almacen">Almacen</option>
           <option value="limpieza">Limpieza</option>
         </select>
-        <button>Agregar producto</button>
+        <button className="agregar">Agregar producto</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
         {message && <p style={{ color: "green" }}>{message}</p>}
       </form>
