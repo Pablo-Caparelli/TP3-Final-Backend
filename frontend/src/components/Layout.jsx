@@ -17,7 +17,9 @@ const Layout = ({ children }) => {
           {!user && (
             <ul>
               <li>
-                <Link to="/">Inicio</Link>
+                <Link to="/" state={{ reload: true }}>
+                  Inicio
+                </Link>
               </li>
               <li>
                 <Link to="/login">Login</Link>
@@ -31,7 +33,9 @@ const Layout = ({ children }) => {
             <>
               <ul>
                 <li>
-                  <Link to="/">Inicio</Link>
+                  <Link to="/" state={{ reload: true }}>
+                    Inicio
+                  </Link>
                 </li>
                 <li>
                   <Link to="/dashboard">Dashboard</Link>
@@ -43,9 +47,7 @@ const Layout = ({ children }) => {
         </nav>
       </header>
       <main>{children}</main>
-      <footer>
-        <p>Sitio desarrollado por Gabriel Alberini | UTN</p>
-      </footer>
+      <footer>&copy; 2025 Sitio Desarrollado por Pablo Caparelli.</footer>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { getProducts, deleteProduct } from "../services/product";
 import { useAuth } from "../context/AuthContext";
@@ -8,6 +9,7 @@ const Home = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const { user } = useAuth();
+  const location = useLocation();
 
   const fetchProducts = async () => {
     const response = await getProducts();
@@ -35,6 +37,12 @@ const Home = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    if (location.state?.reload) {
+      fetchProducts();
+    }
+  }, [location.state]);
+
   const handleSearch = () => {
     const filtered = products.filter((product) =>
       product.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -43,8 +51,12 @@ const Home = () => {
     setSearchInput(""); // limpia el input después de filtrar
   };
 
+  const handleInicio = () => {
+    fetchProducts();
+  };
+
   return (
-    <Layout>
+    <Layout onInicioClick={handleInicio}>
       <h1>Bienvenido a nuestra tienda de productos artesanales</h1>
       <p>
         Descubrí nuestra selección exclusiva de productos únicos hechos a mano.
