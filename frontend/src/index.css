@@ -143,3 +143,24 @@ section p {
     grid-template-columns: 1fr;
   }
 }
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.search-label {
+  padding: 0 15px;
+}
+
+.search-button {
+  margin-left: 15px;
+  background-color: green;
+}
+
+.clean-button {
+  margin-left: 15px;
+  background-color: rgb(129, 129, 47);
+}
