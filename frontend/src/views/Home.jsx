@@ -114,7 +114,7 @@ const Home = () => {
                 <b>Categoria:</b> {product.category}
               </p>
               {user && (
-                <>
+                <div className="botones">
                   <div className="cont-button-delete">
                     <button onClick={() => handleClick(product)}>Borrar</button>
                   </div>
@@ -123,7 +123,7 @@ const Home = () => {
                       Actualizar
                     </button>
                   </div>
-                </>
+                </div>
               )}
             </div>
           ))
