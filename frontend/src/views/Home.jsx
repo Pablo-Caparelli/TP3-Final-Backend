@@ -21,13 +21,16 @@ const Home = () => {
     }
   };
 
-  const handleClick = async (id) => {
-    if (confirm("Esta seguro que quieres borrar el producto?")) {
-      const response = await deleteProduct(id);
+  const handleClick = async (product) => {
+    if (confirm("¿Estás seguro que quieres borrar el producto?")) {
+      const response = await deleteProduct(product._id);
       if (!response.ok) {
         alert("Error al borrar producto.");
       } else {
-        alert("Producto borrado con éxito.");
+        alert(`🗑️ El Producto fue borrado con éxito:
+        Nombre: ${product.name}
+        Precio: ${product.price}
+        Categoría: ${product.category}`);
         fetchProducts();
       }
     }
@@ -94,9 +97,7 @@ const Home = () => {
               </p>
               {user && (
                 <div className="cont-button-product">
-                  <button onClick={() => handleClick(product._id)}>
-                    Borrar
-                  </button>
+                  <button onClick={() => handleClick(product)}>Borrar</button>
                 </div>
               )}
             </div>
