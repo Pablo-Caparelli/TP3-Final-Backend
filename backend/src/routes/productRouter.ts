@@ -14,6 +14,6 @@ productRouter.get("/", getAllProducts);
 productRouter.post("/", addNewProduct);
 productRouter.patch("/:id", updateProduct);
 productRouter.delete("/:id", deleteProduct);
-productRouter.get("/:name", getNameProduct);
+productRouter.get("/name/:name", getNameProduct);
 
 export { productRouter };
