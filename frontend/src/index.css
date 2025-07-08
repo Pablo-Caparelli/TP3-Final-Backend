@@ -189,3 +189,7 @@ section p {
 .search-button:hover {
   background-color: rgb(83, 202, 83);
 }
+
+.agregar {
+  background-color: rgb(224, 10, 224);
+}
