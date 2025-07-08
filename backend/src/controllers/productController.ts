@@ -5,7 +5,7 @@ const getAllProducts = async (req: Request, res: Response): Promise<any> => {
   try {
     const products = await Product.find();
     res.json({
-      sucess: true,
+      success: true,
       data: products,
       message: "Obteniendo los productos",
     });
@@ -51,7 +51,7 @@ const addNewProduct = async (req: Request, res: Response): Promise<any> => {
     await newProduct.save();
 
     res.status(201).json({
-      sucess: true,
+      success: true,
       message: "Producto creado con éxito",
       data: newProduct,
     });
