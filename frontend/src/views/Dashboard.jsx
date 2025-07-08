@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout";
-import { createProduct } from "../services/product";
+import { createProduct, updateProduct } from "../services/product";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const productToEdit = location.state?.productToEdit || null;
+  const isEditMode = Boolean(productToEdit);
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("sin categoria");
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    if (isEditMode && productToEdit) {
+      setName(productToEdit.name || "");
+      setPrice(productToEdit.price || 0);
+      setCategory(productToEdit.category || "sin categoria");
+    }
+  }, [isEditMode, productToEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,33 +29,61 @@ const Dashboard = () => {
     setMessage(null);
 
     if (!name || !price || category === "sin categoria") {
-      setError("Debes seleccionar valores validos.");
+      setError("Debes completar todos los campos.");
       return;
     }
 
     try {
-      const response = await createProduct({ name, price, category });
+      let response;
+
+      if (isEditMode) {
+        response = await updateProduct(productToEdit._id, {
+          name,
+          price,
+          category,
+        });
+      } else {
+        response = await createProduct({ name, price, category });
+      }
 
       if (!response.ok) {
-        setError("Error al almacenar el producto.");
+        setError("Error al guardar el producto.");
         return;
       }
 
       const serverRes = await response.json();
 
-      setName("");
-      setPrice(0);
-      setCategory("sin categoria");
-      setMessage("Producto agregado con éxito ID: " + serverRes.data._id);
+      setMessage(
+        isEditMode
+          ? "✅ Producto actualizado con éxito"
+          : "✅ Producto creado con éxito ID: " + serverRes.data._id
+      );
+
+      if (isEditMode) {
+        alert(`✅ Producto actualizado con éxito:
+        Nombre: ${name}
+        Precio: ${price}
+        Categoría: ${category}`);
+      } else {
+        alert(`✅ Producto creado con éxito:
+        Nombre: ${name}
+        Precio: ${price}
+        Categoría: ${category}`);
+
+        setName("");
+        setPrice(0);
+        setCategory("sin categoria");
+      }
     } catch (error) {
-      console.log(error);
-      setError(error.message);
+      console.error(error);
+      setError("Ocurrió un error inesperado.");
     }
   };
 
   return (
     <Layout>
       <h1>Panel de administración</h1>
+      <h2>{isEditMode ? "Editar producto" : "Agregar nuevo producto"}</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Nombre del producto:</label>
         <input
@@ -50,6 +92,7 @@ const Dashboard = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+
         <label htmlFor="price">Precio del producto:</label>
         <input
           type="number"
@@ -57,13 +100,22 @@ const Dashboard = () => {
           value={price}
           onChange={(e) => setPrice(Number(e.target.value))}
         />
-        <label htmlFor="category">Selecciona una categoria de producto:</label>
-        <select id="category" onChange={(e) => setCategory(e.target.value)}>
-          <option value="sin categoria">Sin categoria</option>
-          <option value="almacen">Almacen</option>
+
+        <label htmlFor="category">Categoría del producto:</label>
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="sin categoria">Sin categoría</option>
+          <option value="almacen">Almacén</option>
           <option value="limpieza">Limpieza</option>
         </select>
-        <button className="agregar">Agregar producto</button>
+
+        <button className="agregar">
+          {isEditMode ? "Actualizar producto" : "Agregar producto"}
+        </button>
+
         {error && <p style={{ color: "red" }}>{error}</p>}
         {message && <p style={{ color: "green" }}>{message}</p>}
       </form>

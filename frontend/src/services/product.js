@@ -24,4 +24,14 @@ const deleteProduct = async (id) => {
   return response;
 };
 
-export { getProducts, createProduct, deleteProduct };
+const updateProduct = (id, data) => {
+  return fetch(`http://localhost:1234/api/products/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+export { getProducts, createProduct, deleteProduct, updateProduct };

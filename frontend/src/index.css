@@ -65,9 +65,13 @@ select {
   border-radius: 4px;
 }
 
-.cont-button-product {
+.cont-button-delete {
   display: flex;
   gap: 5px;
+}
+
+.cont-button-update {
+  margin-top: 10px;
 }
 
 button {

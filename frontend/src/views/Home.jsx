@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { getProducts, deleteProduct } from "../services/product";
 import { useAuth } from "../context/AuthContext";
@@ -10,6 +10,7 @@ const Home = () => {
   const [searchInput, setSearchInput] = useState("");
   const { user } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     const response = await getProducts();
@@ -34,6 +35,23 @@ const Home = () => {
         fetchProducts();
       }
     }
+  };
+
+  // const handleUpdate = async (product) => {
+  //   navigate("/dashboard", { state: { productToEdit: product } });
+  //   if (!response.ok) {
+  //     alert("Error al actualizar el producto.");
+  //   } else {
+  //     alert(`🗑️ El Producto fue actualizado con éxito:
+  //       Nombre: ${product.name}
+  //       Precio: ${product.price}
+  //       Categoría: ${product.category}`);
+  //     fetchProducts();
+  //   }
+  // };
+
+  const handleUpdate = (product) => {
+    navigate("/dashboard", { state: { productToEdit: product } });
   };
 
   useEffect(() => {
@@ -96,9 +114,16 @@ const Home = () => {
                 <b>Categoria:</b> {product.category}
               </p>
               {user && (
-                <div className="cont-button-product">
-                  <button onClick={() => handleClick(product)}>Borrar</button>
-                </div>
+                <>
+                  <div className="cont-button-delete">
+                    <button onClick={() => handleClick(product)}>Borrar</button>
+                  </div>
+                  <div className="cont-button-update">
+                    <button onClick={() => handleUpdate(product)}>
+                      Actualizar
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           ))
