@@ -1,12 +1,91 @@
-# React + Vite
+# 🛒 TP3-Final: Tienda de Productos Artesanales
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación fullstack que permite la gestión de productos artesanales. Incluye un sistema de autenticación de usuarios y una interfaz para crear, editar, buscar y eliminar productos.
 
-Currently, two official plugins are available:
+## 🆕 Nueva funcionalidad
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Se incorporó **autenticación con JWT** en el backend y una **interfaz de administración (dashboard)** en el frontend, accesible solo por usuarios autenticados. Desde el dashboard se puede:
 
-## Expanding the ESLint configuration
+- Crear nuevos productos
+- Editar productos existentes
+- Eliminar productos
+- Visualizar alertas de éxito o error
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+También se agregó una **búsqueda de productos por nombre**, la cual filtra resultados dinámicamente.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+### Backend
+
+- Node.js
+- Express
+- TypeScript
+- MongoDB + Mongoose
+- bcryptjs (hash de contraseñas)
+- jsonwebtoken (JWT)
+
+### Frontend
+
+- React
+- Vite
+- React Router DOM
+- Context API para autenticación
+
+---
+
+## ▶️ Instrucciones para ejecutar el proyecto
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/Pablo-Caparelli/TP3-Final-Backend.git
+
+2. Backend
+a. Entrar al directorio del backend:
+bash
+Copiar
+Editar
+cd TP3-Final-Backend
+b. Instalar dependencias:
+bash
+Copiar
+Editar
+npm install
+c. Crear archivo .env en la raíz del backend:
+env
+Copiar
+Editar
+PORT=
+URI_DB=
+JWT_SECRET=
+d. Ejecutar el servidor:
+bash
+Copiar
+Editar
+npm run dev
+
+3. Frontend
+a. Entrar al directorio del frontend (ajustar nombre si es diferente):
+bash
+Copiar
+Editar
+cd ../nombre-del-frontend
+b. Crear archivo .env:
+env
+Copiar
+Editar
+VITE_API_URL=
+c. Instalar dependencias:
+bash
+Copiar
+Editar
+npm install
+d. Ejecutar el servidor:
+bash
+Copiar
+Editar
+npm run dev
+
+```
