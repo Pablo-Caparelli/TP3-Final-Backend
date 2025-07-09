@@ -37,19 +37,6 @@ const Home = () => {
     }
   };
 
-  // const handleUpdate = async (product) => {
-  //   navigate("/dashboard", { state: { productToEdit: product } });
-  //   if (!response.ok) {
-  //     alert("Error al actualizar el producto.");
-  //   } else {
-  //     alert(`🗑️ El Producto fue actualizado con éxito:
-  //       Nombre: ${product.name}
-  //       Precio: ${product.price}
-  //       Categoría: ${product.category}`);
-  //     fetchProducts();
-  //   }
-  // };
-
   const handleUpdate = (product) => {
     navigate("/dashboard", { state: { productToEdit: product } });
   };
