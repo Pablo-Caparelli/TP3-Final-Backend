@@ -103,7 +103,7 @@ const Register = () => {
         <button type="button" onClick={handleVisibilityPassword}>
           Ver contraseña
         </button>
-        <button>Enviar</button>
+        <button className="register">Enviar</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
         {message && <p style={{ color: "green" }}>{message}</p>}
       </form>

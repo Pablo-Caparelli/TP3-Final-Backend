@@ -197,3 +197,19 @@ section p {
 .agregar:hover {
   background-color: rgb(248, 99, 248);
 }
+
+.register {
+  background-color: rgb(3, 173, 179) !important;
+}
+
+.register:hover {
+  background-color: rgb(66, 175, 179) !important;
+}
+
+.login {
+  background-color: rgb(3, 173, 179) !important;
+}
+
+.login:hover {
+  background-color: rgb(66, 175, 179) !important;
+}

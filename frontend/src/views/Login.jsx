@@ -86,7 +86,7 @@ const Login = () => {
         >
           Ver contraseña
         </button>
-        <button>Enviar</button>
+        <button className="login">Enviar</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
         {message && <p style={{ color: "green" }}>{message}</p>}
       </form>
