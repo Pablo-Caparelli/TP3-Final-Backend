@@ -51,12 +51,26 @@ const Home = () => {
     }
   }, [location.state]);
 
-  const handleSearch = () => {
-    const filtered = products.filter((product) =>
-      product.name.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-    setSearchInput(""); // limpia el input después de filtrar
+  const handleSearch = async () => {
+    if (!searchInput.trim()) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:1234/api/products/name/${searchInput}`
+      );
+      const result = await response.json();
+
+      if (!response.ok) {
+        setFilteredProducts([]);
+      } else {
+        setFilteredProducts(result.data);
+      }
+
+      setSearchInput("");
+    } catch (error) {
+      console.error("Error al buscar productos:", error);
+      setFilteredProducts([]);
+    }
   };
 
   const handleInicio = () => {
@@ -80,6 +94,12 @@ const Home = () => {
           type="text"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleSearch();
+            }
+          }}
           placeholder="Ingrese nombre del producto"
         />
         <button className="search-button" onClick={handleSearch}>
