@@ -56,7 +56,7 @@ const Home = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:1234/api/products/name/${searchInput}`
+        `${import.meta.env.VITE_API_URL}/api/products/name/${searchInput}`
       );
       const result = await response.json();
 
