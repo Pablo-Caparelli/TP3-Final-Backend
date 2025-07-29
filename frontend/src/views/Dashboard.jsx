@@ -59,21 +59,16 @@ const Dashboard = () => {
           : "✅ Producto creado con éxito ID: " + serverRes.data._id
       );
 
-      if (isEditMode) {
-        alert(`✅ Producto actualizado con éxito:
-        Nombre: ${name}
-        Precio: ${price}
-        Categoría: ${category}`);
-      } else {
-        alert(`✅ Producto creado con éxito:
-        Nombre: ${name}
-        Precio: ${price}
-        Categoría: ${category}`);
+      alert(`✅ Producto ${isEditMode ? "actualizado" : "creado"} con éxito:
+      Nombre: ${name}
+      Precio: ${price}
+      Categoría: ${category}`);
 
-        setName("");
-        setPrice(0);
-        setCategory("sin categoria");
-      }
+      setName("");
+      setPrice(0);
+      setCategory("sin categoria");
+
+      navigate("/");
     } catch (error) {
       console.error(error);
       setError("Ocurrió un error inesperado.");

@@ -25,7 +25,7 @@ const deleteProduct = async (id) => {
 };
 
 const updateProduct = (id, data) => {
-  return fetch(`http://localhost:1234/api/products/${id}`, {
+  return fetch(`${BASE_API}/products/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
